@@ -13,6 +13,10 @@ const getMessageModel = (sequelize, { DataTypes }) => {
     Message.belongsTo(models.User);
   };
 
+  Message.findAll = async ()=>{
+    Message
+  }
+
   return Message;
 };
 
