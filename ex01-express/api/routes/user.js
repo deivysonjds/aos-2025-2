@@ -1,6 +1,5 @@
 import { Router } from "express";
-import models from "../models";
-import { where } from "sequelize";
+import models from "../models/index.js";
 
 const router = Router();
 
@@ -44,7 +43,7 @@ router.put("/:userId", async(req, res) => {
   if(user == null) return res.status(404).send()
   
   let {username, email} = req.body
-  
+
   user.set({
     username: username ? username : user.username,
     email: email ? email : user.email,

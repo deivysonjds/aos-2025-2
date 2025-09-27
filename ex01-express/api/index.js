@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 
 import models, { sequelize } from "./models/index.js";
-import routes from "./routes";
+import routes from "./routes/index.js";
 
 const app = express();
 app.set("trust proxy", true);
