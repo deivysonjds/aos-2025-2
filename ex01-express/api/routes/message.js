@@ -1,6 +1,5 @@
 import { Router } from "express";
 import models from "../models";
-import { where } from "sequelize";
 
 const router = Router();
 
