@@ -34,6 +34,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use("/", routes.root);
+app.use("/tasks", routes.tasks)
 app.use("/session", routes.session);
 app.use("/users", routes.user);
 app.use("/messages", routes.message);
