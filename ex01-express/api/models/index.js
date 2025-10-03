@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-
+import pg from "pg"
 import getUserModel from "./user.js";
 import getMessageModel from "./message.js";
 import getTasksModel from "./tasks.js";
