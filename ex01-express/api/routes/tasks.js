@@ -1,37 +1,75 @@
-import { v4 as uuidv4 } from "uuid";
 import { Router } from "express";
+import models from "../models/index.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 
-  return res.send(Object.values(req.context.models.Message));
+    let { userId } = req.query
+
+    let tasks = await models.Tasks.findAll({
+        where: {
+            userId: userId
+        }
+    })
+    return res.status(200).send(tasks);
 });
 
-router.get("/:messageId", (req, res) => {
-  return res.send(req.context.models.messages[req.params.messageId]);
+router.get("/:taskId", async (req, res) => {
+    let id = req.params.taskId
+
+    let task = await models.Tasks.findOne({
+        where: {
+            id: id
+        }
+    })
+
+    if (task == null) return res.status(404).send("Mensagem não encontrada")
+
+    return res.status(200).send(task)
 });
 
-router.post("/", (req, res) => {
-  const id = uuidv4();
-  const message = {
-    id,
-    text: req.body.text,
-    userId: req.context.me.id,
-  };
+router.post("/", async (req, res) => {
+    let { userId } = req.query
 
-  req.context.models.messages[id] = message;
+    let task = await models.Tasks.create({
+        description: req.body.text,
 
-  return res.send(message);
+        userId: userId,
+    })
+
+    return res.status(201).send(task);
 });
 
-router.delete("/:messageId", (req, res) => {
-  const { [req.params.messageId]: message, ...otherMessages } =
-    req.context.models.messages;
+router.delete("/:taskId", async (req, res) => {
+    let id = req.params.taskId
 
-  req.context.models.messages = otherMessages;
+    await models.Tasks.destroy({
+        where: {
+            id: id
+        }
+    })
 
-  return res.send(message);
+    return res.status(204).send();
+});
+
+router.put("/:taskId", async (req, res) => {
+    let id = req.params.taskId
+
+    let task = await models.Tasks.findOne({
+        where: {
+            id: id
+        }
+    })
+
+    if (task == null) return res.status(404).send()
+        
+    if(req.body.description != null) task.set({description: req.body.description})
+    if(req.body.concluida != null) task.set({description: req.body.concluida})
+
+    await task.save()
+
+    return res.status(200).send(task)
 });
 
 export default router;
