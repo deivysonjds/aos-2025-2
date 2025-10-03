@@ -1,37 +1,75 @@
-import { v4 as uuidv4 } from "uuid";
 import { Router } from "express";
+import models from "../models/index.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 
-  return res.send(Object.values(req.context.models.Message));
+  let {userId} = req.query
+
+  let messages = await models.Message.findAll({
+    where: {
+      userId: userId
+    }
+  })
+  return res.status(200).send(messages);
 });
 
-router.get("/:messageId", (req, res) => {
-  return res.send(req.context.models.messages[req.params.messageId]);
+router.get("/:messageId", async (req, res) => {
+  let id = req.params.messageId
+
+  let message = await models.Message.findOne({
+    where: {
+      id: id
+    }
+  })
+
+  if(message == null) return res.status(404).send("Mensagem não encontrada")
+
+  return res.status(200).send(message)
 });
 
-router.post("/", (req, res) => {
-  const id = uuidv4();
-  const message = {
-    id,
+router.post("/", async (req, res) => {
+  let {userId} = req.query
+  
+  let message = await models.Message.create({
     text: req.body.text,
-    userId: req.context.me.id,
-  };
+    userId: userId,
+  })
 
-  req.context.models.messages[id] = message;
-
-  return res.send(message);
+  return res.status(201).send(message);
 });
 
-router.delete("/:messageId", (req, res) => {
-  const { [req.params.messageId]: message, ...otherMessages } =
-    req.context.models.messages;
+router.delete("/:messageId",async (req, res) => {
+  let id = req.params.messageId
 
-  req.context.models.messages = otherMessages;
+  await models.Message.destroy({
+    where: {
+      id: id
+    }
+  })
 
-  return res.send(message);
+  return res.status(204).send();
+});
+
+router.put("/:messageId",async (req, res) => {
+  let id = req.params.messageId
+  
+  let message = await models.Message.findOne({
+    where: {
+      id: id
+    }
+  })
+
+  if(message == null) return res.status(404).send()
+
+  message.set({
+    text: req.body.text
+  })
+
+  await message.save()
+
+  return res.status(200).send(message)
 });
 
 export default router;
