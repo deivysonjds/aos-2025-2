@@ -27,7 +27,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", routes.root);
 app.use("/tasks", routes.tasks)
-app.use("/session", routes.session);
 app.use("/users", routes.user);
 app.use("/messages", routes.message);
 

@@ -1,8 +1,8 @@
 import Sequelize from "sequelize";
 
-import getUserModel from "./user";
-import getMessageModel from "./message";
-import getTasksModel from "./tasks";
+import getUserModel from "./user.js";
+import getMessageModel from "./message.js";
+import getTasksModel from "./tasks.js";
 
 //POSTGRES_URL
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {

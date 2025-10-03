@@ -1,8 +1,8 @@
-import session from "./session";
-import user from "./user";
-import message from "./message";
-import root from "./root";
-import tasks from "./tasks"
+import session from "./session.js";
+import user from "./user.js";
+import message from "./message.js";
+import root from "./root.js";
+import tasks from "./tasks.js"
 
 export default {
   root,
