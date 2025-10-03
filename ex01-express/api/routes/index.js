@@ -5,7 +5,6 @@ import tasks from "./tasks.js"
 
 export default {
   root,
-  session,
   user,
   message,
   tasks
