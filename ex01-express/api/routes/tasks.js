@@ -33,9 +33,9 @@ router.post("/", async (req, res) => {
     let { userId } = req.query
 
     let task = await models.Tasks.create({
-        description: req.body.text,
-
-        userId: userId,
+        descricao: req.body.descricao,
+        consluida: req.body.consluida,
+        userId: userId || 1,
     })
 
     return res.status(201).send(task);
