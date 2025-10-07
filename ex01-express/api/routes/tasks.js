@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 
     let task = await models.Tasks.create({
         descricao: req.body.descricao,
-        consluida: req.body.consluida,
+        concluida: req.body.concluida,
         userId: userId || 1,
     })
 
@@ -64,8 +64,8 @@ router.put("/:taskId", async (req, res) => {
 
     if (task == null) return res.status(404).send()
         
-    if(req.body.description != null) task.set({description: req.body.description})
-    if(req.body.concluida != null) task.set({description: req.body.concluida})
+    if(req.body.descricao != null) task.set({descricao: req.body.descricao})
+    if(req.body.concluida != null) task.set({descricao: req.body.concluida})
 
     await task.save()
 
