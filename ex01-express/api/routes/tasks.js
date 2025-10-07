@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
 
     let tasks = await models.Tasks.findAll({
         where: {
-            userId: userId
+            userId: userId || 1
         }
     })
     return res.status(200).send(tasks);
