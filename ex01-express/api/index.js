@@ -32,7 +32,7 @@ app.use("/messages", routes.message);
 
 const port = process.env.PORT ?? 3000;
 
-const eraseDatabaseOnSync = process.env.ERASE_DATABASE == "true" ;
+const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true" || true ;
 
 sequelize.sync({force: eraseDatabaseOnSync}).then(async () => {
   if (eraseDatabaseOnSync) {
@@ -49,6 +49,7 @@ const createUsersWithMessages = async () => {
     {
       username: "rwieruch",
       email: "rwieruch@email.com",
+      password: "senha1",
       messages: [
         {
           text: "Published the Road to learn React",
@@ -67,6 +68,7 @@ const createUsersWithMessages = async () => {
     {
       username: "ddavids",
       email: "ddavids@email.com",
+      password: "senha2",
       messages: [
         {
           text: "Happy to release ...",
