@@ -34,7 +34,7 @@ const port = process.env.PORT ?? 3000;
 
 const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true";
 
-sequelize.sync().then(async () => {
+sequelize.sync({force: true}).then(async () => {
   if (eraseDatabaseOnSync) {
     createUsersWithMessages();
   }
