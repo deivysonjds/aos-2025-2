@@ -16,7 +16,7 @@ const getUserModel = (sequelize, { DataTypes }) => {
         notEmpty: true,
       },
     },
-    password: {
+    senha: {
       type: DataTypes.STRING,
       allowNull: false,
     }
