@@ -32,8 +32,8 @@ app.use("/", routes.root);
 app.use("/signIn", routes.signIn);
 app.use("/signUp", routes.signUp);
 app.use("/tasks", routes.tasks)
-app.use("/users", routes.user);
-app.use("/messages", routes.message);
+app.use("/users",authMiddleware, routes.user);
+app.use("/messages",authMiddleware, routes.message);
 
 const port = process.env.PORT ?? 3000;
 
