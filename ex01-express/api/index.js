@@ -37,7 +37,7 @@ app.use("/messages",authMiddleware, routes.message);
 
 const port = process.env.PORT ?? 3000;
 
-const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true" || true ;
+const eraseDatabaseOnSync = process.env.ERASE_DATABASE === "true";
 
 sequelize.sync({force: eraseDatabaseOnSync}).then(async () => {
   if (eraseDatabaseOnSync) {
