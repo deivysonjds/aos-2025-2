@@ -23,14 +23,6 @@ router.get("/:userId", async (req, res) => {
   return res.status(200).send(user)
 });
 
-router.post("/", async (req, res) => {
-  let data = req.body
-
-  let newUser = await models.User.create(data)
-
-  return res.status(201).send(newUser);
-});
-
 router.put("/:userId", async(req, res) => {
   let id = req.params.userId
   
