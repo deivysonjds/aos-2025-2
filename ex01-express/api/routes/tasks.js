@@ -7,11 +7,7 @@ router.get("/", async (req, res) => {
 
     let { userId } = req.query
 
-    let tasks = await models.Tasks.findAll({
-        where: {
-            userId: userId || 1
-        }
-    })
+    let tasks = await models.Tasks.findAll()
     return res.status(200).send(tasks);
 });
 
