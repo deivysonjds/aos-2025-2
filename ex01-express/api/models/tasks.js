@@ -1,6 +1,6 @@
 
 const getTasksModel = (sequelize, { DataTypes }) => {
-  const Message = sequelize.define("tarefas", {
+  const Message = sequelize.define("tarefa", {
     descricao: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,10 +19,6 @@ const getTasksModel = (sequelize, { DataTypes }) => {
   Message.associate = (models) => {
     Message.belongsTo(models.User);
   };
-
-  Message.findAll = async ()=>{
-    Message
-  }
 
   return Message;
 };

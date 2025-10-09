@@ -5,9 +5,9 @@ const router = Router();
 
 router.get("/", async (req, res) => {
 
-    let { userId } = req.query
-
     let tasks = await models.Tasks.findAll()
+    console.log(tasks);
+    
     return res.status(200).send(tasks);
 });
 
