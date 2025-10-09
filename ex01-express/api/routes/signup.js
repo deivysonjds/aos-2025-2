@@ -1,16 +1,21 @@
 import { Router } from "express";
 import models from "../models/index.js";
+import argon2 from "argon2"
 
 const router = Router()
+
 
 router.post("/", async (req, res)=>{
     const {email, senha, username} = req.body
     if (!email || !senha) {
         return res.status(400).send("Email ou senha nulos!")
     }
+
+    let senhaHash = await argon2.hash(senha)
+
     let user = {
         email: email,
-        senha: senha,
+        senha: senhaHash,
         username: username
     }
     
