@@ -14,6 +14,6 @@ export default function authMiddleware(req, res, next) {
     req.user = decoded;
     next();
   } catch (err) {
-    return res.status(403).json({ error: 'Token inválido ou expirado' });
+    return res.status(403).json({ error: 'Token inválido' });
   }
 }

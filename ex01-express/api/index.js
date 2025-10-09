@@ -7,6 +7,7 @@ import routes from "./routes/index.js";
 import jwt from "jsonwebtoken"
 
 import authMiddleware from "./middleware/authMiddleware.js";
+import argon2d from "argon2";
 
 const app = express();
 app.set("trust proxy", true);
@@ -26,7 +27,6 @@ app.use((req, res, next) => {
 // e armazenar na propriedade req.body (utiliza o body-parser)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 app.use("/", routes.root);
 app.use("/signIn", routes.signIn);
@@ -54,7 +54,7 @@ const createUsersWithMessages = async () => {
     {
       username: "rwieruch",
       email: "rwieruch@email.com",
-      senha: "senha1",
+      senha: await argon2d.hash("senha1"),
       messages: [
         {
           text: "Published the Road to learn React",
@@ -73,7 +73,7 @@ const createUsersWithMessages = async () => {
     {
       username: "ddavids",
       email: "ddavids@email.com",
-      senha: "senha2",
+      senha: await argon2d.hash("senha2"),
       messages: [
         {
           text: "Happy to release ...",
