@@ -27,13 +27,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const SECRET = process.env.JWT_SECRET;
-jwt.
-
 
 app.use("/", routes.root);
-app.use("/", routes.signIn);
-app.use("/", routes.signUp);
+app.use("/signIn", routes.signIn);
+app.use("/signUp", routes.signUp);
 app.use("/tasks", routes.tasks)
 app.use("/users", routes.user);
 app.use("/messages", routes.message);

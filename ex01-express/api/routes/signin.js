@@ -1,9 +1,9 @@
-import createToken from "../services/createToken"
+import createToken from "../services/createToken.js"
 import {Router} from "express"
 
 const router = Router()
 
-router.post("/signIn",(req, res)=>{
+router.post("/",(req, res)=>{
     const data = req.body
 
     let token = createToken(data)
