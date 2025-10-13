@@ -4,7 +4,6 @@ import express from "express";
 
 import models, { sequelize } from "./models/index.js";
 import routes from "./routes/index.js";
-import jwt from "jsonwebtoken"
 
 import authMiddleware from "./middleware/authMiddleware.js";
 import argon2d from "argon2";

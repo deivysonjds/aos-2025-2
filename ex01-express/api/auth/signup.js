@@ -1,6 +1,6 @@
 import { Router } from "express";
 import models from "../models/index.js";
-import argon2 from "argon2"
+import argon2, { argon2id } from "argon2"
 
 const router = Router()
 
@@ -11,7 +11,10 @@ router.post("/", async (req, res)=>{
         return res.status(400).send("Email ou senha nulos!")
     }
 
-    let senhaHash = await argon2.hash(senha)
+    let senhaHash = await argon2.hash(senha, {
+        type: argon2id,
+        secret: process.env.PEPPER_SECRET
+    })
 
     let user = {
         email: email,

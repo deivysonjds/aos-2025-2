@@ -3,6 +3,7 @@ import pg from "pg"
 import getUserModel from "./user.js";
 import getMessageModel from "./message.js";
 import getTasksModel from "./tasks.js";
+import getTokensModel from "./token.js";
 
 //POSTGRES_URL
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {
@@ -23,7 +24,8 @@ const sequelize = new Sequelize(process.env.POSTGRES_URL, {
 const models = {
   User: getUserModel(sequelize, Sequelize),
   Message: getMessageModel(sequelize, Sequelize),
-  Tasks: getTasksModel(sequelize, Sequelize)
+  Tasks: getTasksModel(sequelize, Sequelize),
+  Token: getTokensModel(sequelize, Sequelize)
 };
 
 Object.keys(models).forEach((key) => {
