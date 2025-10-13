@@ -1,7 +1,7 @@
 
 const getTokensModel = (sequelize, { DataTypes }) => {
   const Token = sequelize.define("token", {
-    token: {
+    tokenId: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
