@@ -18,9 +18,9 @@ router.post("/", async (req, res)=>{
 
     if(!isValid) return res.status(401).send({error: "credenciais inválidas"})
 
-    let token = createToken({id: user.id, email: user.email})
+    let tokens = createToken({id: user.id})
 
-    return res.status(200).send({token})
+    return res.status(200).send(tokens)
 })
 
 export default router
