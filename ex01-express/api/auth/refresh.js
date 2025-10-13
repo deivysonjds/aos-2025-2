@@ -1,7 +1,4 @@
-import models from "../models/index.js";
-import createToken from "../services/createToken.js";
 import { Router } from "express";
-import argon2d from "argon2";
 import jwt from "jsonwebtoken";  // Importando o JWT
 
 const router = Router();
