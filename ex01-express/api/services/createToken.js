@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { v4 } from "uuid";
-import models from "../models";
+import models from "../models/index.js";
 import jwt from "jsonwebtoken";
 
 export default async function createToken(dados) {

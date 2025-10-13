@@ -5,7 +5,7 @@ import argon2d from "argon2";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
+router.post("/signin", async (req, res) => {
     const { email, senha } = req.body;
 
     try {

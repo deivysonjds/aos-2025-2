@@ -4,6 +4,7 @@ import express from "express";
 
 import models, { sequelize } from "./models/index.js";
 import routes from "./routes/index.js";
+import auth from "./auth/index.js"
 
 import authMiddleware from "./middleware/authMiddleware.js";
 import argon2d from "argon2";
@@ -28,8 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", routes.root);
-app.use("/signIn", routes.signIn);
-app.use("/signUp", routes.signUp);
+app.use("/", auth);
 app.use("/tasks", routes.tasks)
 app.use("/users",authMiddleware, routes.user);
 app.use("/messages",authMiddleware, routes.message);

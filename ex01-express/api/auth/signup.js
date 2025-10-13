@@ -5,7 +5,7 @@ import argon2, { argon2id } from "argon2"
 const router = Router()
 
 
-router.post("/", async (req, res)=>{
+router.post("/signup", async (req, res)=>{
     const {email, senha, username} = req.body
     if (!email || !senha) {
         return res.status(400).send("Email ou senha nulos!")
