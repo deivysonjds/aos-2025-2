@@ -87,3 +87,5 @@ const createUsersWithMessages = async () => {
     }
   );
 };
+
+export default app;
