@@ -13,9 +13,9 @@ router.post("/refresh", async (req, res) => {
 
     try {
         const decoded = jwt.verify(token, process.env.SECRET_REFRESH); 
-        const dados = decoded.id;  
+        const id = decoded.id;  
 
-        const token_acess = jwt.sign(dados, process.env.SECRET_ACESS, { expiresIn: process.env.SECRET_ACESS_EXPIRES }); 
+        const token_acess = jwt.sign({id: id}, process.env.SECRET_ACESS, { expiresIn: process.env.SECRET_ACESS_EXPIRES }); 
 
         return res.status(200).json({ acess: token_acess });
     } catch (err) {
