@@ -13,7 +13,7 @@ router.post("/signup", async (req, res)=>{
 
     let senhaHash = await argon2.hash(senha, {
         type: argon2id,
-        secret: process.env.PEPPER_SECRET
+        secret: Buffer.from(process.env.PEPPER_SECRET)
     })
 
     let user = {
