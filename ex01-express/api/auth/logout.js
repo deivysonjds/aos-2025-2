@@ -22,7 +22,7 @@ router.post("/logout", async (req, res) => {
             }
         }) 
 
-        return res.status(200).json({ acess: token_acess });
+        return res.status(200).json();
     } catch (err) {
         return res.status(403).json({ error: 'não autorizado' });
     }
