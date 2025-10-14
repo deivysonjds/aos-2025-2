@@ -53,7 +53,10 @@ const createUsersWithMessages = async () => {
     {
       username: "rwieruch",
       email: "rwieruch@email.com",
-      senha: await argon2d.hash("senha1"),
+      senha: await argon2.hash(senha, {
+        type: argon2id,
+        secret: Buffer.from(process.env.PEPPER_SECRET)
+      }),
       messages: [
         {
           text: "Published the Road to learn React",
@@ -72,7 +75,10 @@ const createUsersWithMessages = async () => {
     {
       username: "ddavids",
       email: "ddavids@email.com",
-      senha: await argon2d.hash("senha2"),
+      senha: await argon2.hash(senha, {
+        type: argon2id,
+        secret: Buffer.from(process.env.PEPPER_SECRET)
+      }),
       messages: [
         {
           text: "Happy to release ...",
