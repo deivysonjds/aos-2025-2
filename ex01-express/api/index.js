@@ -7,7 +7,7 @@ import routes from "./routes/index.js";
 import auth from "./auth/index.js"
 
 import authMiddleware from "./middleware/authMiddleware.js";
-import argon2d from "argon2";
+import argon2, { argon2id } from "argon2"
 
 const app = express();
 app.set("trust proxy", true);
@@ -53,7 +53,7 @@ const createUsersWithMessages = async () => {
     {
       username: "rwieruch",
       email: "rwieruch@email.com",
-      senha: await argon2.hash(senha, {
+      senha: await argon2.hash("senha1", {
         type: argon2id,
         secret: Buffer.from(process.env.PEPPER_SECRET)
       }),
@@ -75,7 +75,7 @@ const createUsersWithMessages = async () => {
     {
       username: "ddavids",
       email: "ddavids@email.com",
-      senha: await argon2.hash(senha, {
+      senha: await argon2.hash("senha2", {
         type: argon2id,
         secret: Buffer.from(process.env.PEPPER_SECRET)
       }),
