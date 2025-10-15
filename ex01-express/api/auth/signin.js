@@ -2,6 +2,7 @@ import models from "../models/index.js";
 import createToken from "../services/createToken.js";
 import { Router } from "express";
 import argon2d from "argon2";
+import "dotenv/config"
 
 const router = Router();
 
@@ -16,7 +17,7 @@ router.post("/signin", async (req, res) => {
         }
 
         let isValid = await argon2d.verify(user.senha, senha, {
-            secret: process.env.PEPPER_SECRET
+            secret: Buffer.from(process.env.PEPPER_SECRET)
         });
 
         if (!isValid) {
@@ -27,7 +28,7 @@ router.post("/signin", async (req, res) => {
 
         return res.status(200).send(tokens);
     } catch (error) {
-        return res.status(500).send({ error: "Erro interno no servidor" });
+        return res.status(500).send({ error: "Erro interno no servidor : " +error.message});
     }
 });
 

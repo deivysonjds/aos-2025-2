@@ -1,13 +1,15 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken"; 
 import models from "../models/index.js";
+import "dotenv/config"
 
 const router = Router();
 
 router.post("/logout", async (req, res) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-
+    console.log(token);
+    
     if (!token) {
         return res.status(401).json({ error: 'não autorizado' });
     }
@@ -24,7 +26,7 @@ router.post("/logout", async (req, res) => {
 
         return res.status(200).json();
     } catch (err) {
-        return res.status(403).json({ error: 'não autorizado' });
+        return res.status(403).json({ error: 'não autorizado:'+ err.message });
     }
 });
 
