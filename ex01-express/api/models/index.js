@@ -4,6 +4,7 @@ import getUserModel from "./user.js";
 import getMessageModel from "./message.js";
 import getTasksModel from "./tasks.js";
 import getTokensModel from "./token.js";
+import "dotenv/config";
 
 //POSTGRES_URL
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {
